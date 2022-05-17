@@ -8,6 +8,7 @@ public class test {
         kd.insert(7,2,9); //*
         kd.insert(8,5,13); //*
         kd.insert(2,6,8);
+        kd.insert(6,3,9); //*
         kd.insert(4,2,6); //*
         kd.insert(2,3,5);
         /*

@@ -85,27 +85,29 @@ public class KdTree {
 
         int niv = nivel % 2;
 
+        if (nodo.edad >= minE && nodo.edad <= maxE && nodo.peso >= minP && nodo.peso <= maxP && nodo.factor >= minF) {
+            return  1 + buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++) + buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
+        }
+
         if(niv == 0) {
             if (nodo.edad >= minE) {
-                buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++);
-                return 1 ;
+                return buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++);
             }
-
-            if (nodo.edad >= minE && nodo.edad <= maxE && nodo.peso >= minP && nodo.peso <= maxP && nodo.factor >= minF) {
-
-            }
-
             if (nodo.edad <= maxE) {
-                buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
-                return
+                return buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
+            }
+        }else{
+            if (nodo.peso >= minP) {
+                return buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++);
+            }
+            if (nodo.peso <= maxP) {
+                return buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
             }
         }
 
-
-
+        //return  1 + buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++) + buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
+         return 0;
     }
-
-      */
 
 
     private class KdNode{

@@ -71,6 +71,7 @@ public class KdTree {
 
     }
 
+    //problema 2
 
     public int contarRango(int minE,int maxE,int minP,int maxP,float minF){
 

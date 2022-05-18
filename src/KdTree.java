@@ -21,16 +21,17 @@ public class KdTree {
         int dim = nivel % 2;
 
         if(dim == 0){
+
             if(edad < node.edad){
-                node.left = insertarEnKdTree(node.left,edad,peso,factor,nivel++);
+                 node.left = insertarEnKdTree(node.left,edad,peso,factor,++nivel);
             }else{
-                node.right = insertarEnKdTree(node.right,edad,peso,factor,nivel++);
+                 node.right = insertarEnKdTree(node.right,edad,peso,factor,++nivel);
             }
-        }else{
+        }else {
             if(peso < node.peso){
-                node.left = insertarEnKdTree(node.left,edad,peso,factor,nivel++);
+                 node.left = insertarEnKdTree(node.left,edad,peso,factor,++nivel);
             }else{
-                node.right = insertarEnKdTree(node.right,edad,peso,factor,nivel++);
+                 node.right = insertarEnKdTree(node.right,edad,peso,factor,++nivel);
             }
         }
 
@@ -38,7 +39,7 @@ public class KdTree {
 
     }
 
-    // problema 1 funcion factor
+    // problema 1 funcion factor, la funcion retorna -1 cuando no encuentra el factor asociado a un nodo con esa edad y peso
     public float factor(int edad,int peso){
 
         KdNode nodo = buscar(root,edad,peso,0);
@@ -54,17 +55,18 @@ public class KdTree {
         }
 
         int niv = nivel % 2;
+
         if(niv == 0){
             if(edad < node.edad){
-                return buscar(node.left,edad,peso,nivel++);
+                return buscar(node.left,edad,peso,++nivel);
             }else{
-                return buscar(node.right,edad,peso,nivel++);
+                return buscar(node.right,edad,peso,++nivel);
             }
         }else{
             if(peso < node.peso){
-                return buscar(node.left,edad,peso,nivel++);
+                return buscar(node.left,edad,peso,++nivel);
             }else{
-                return buscar(node.right,edad,peso,nivel++);
+                return buscar(node.right,edad,peso,++nivel);
             }
         }
 
@@ -87,30 +89,40 @@ public class KdTree {
         int niv = nivel % 2;
 
         if (nodo.edad >= minE && nodo.edad <= maxE && nodo.peso >= minP && nodo.peso <= maxP && nodo.factor >= minF) {
-            return  1 + buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++) + buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
+            return  1 + buscarRango(nodo.left, minE, maxE, minP, maxP, minF,++nivel) + buscarRango(nodo.right, minE, maxE, minP, maxP, minF,++nivel);
         }
 
         if(niv == 0) {
             if (nodo.edad >= minE) {
-                return buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++);
+                return buscarRango(nodo.left, minE, maxE, minP, maxP, minF,++nivel);
             }
             if (nodo.edad <= maxE) {
-                return buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
+                return buscarRango(nodo.right, minE, maxE, minP, maxP, minF,++nivel);
             }
         }else{
             if (nodo.peso >= minP) {
-                return buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++);
+                return buscarRango(nodo.left, minE, maxE, minP, maxP, minF,++nivel);
             }
             if (nodo.peso <= maxP) {
-                return buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
+                return buscarRango(nodo.right, minE, maxE, minP, maxP, minF,++nivel);
             }
         }
 
-        //return  1 + buscarRango(nodo.left, minE, maxE, minP, maxP, minF,nivel++) + buscarRango(nodo.right, minE, maxE, minP, maxP, minF,nivel++);
          return 0;
     }
 
+    public void Imprimir() {
+        ImprimeAbb(root, " ");
+    }
 
+    private void ImprimeAbb(KdNode n, String tab) {
+        if (n != null) {
+            System.out.println(tab + "->" +  n.edad + "," + n.peso);
+            ImprimeAbb(n.left, tab + "  |");
+            ImprimeAbb(n.right, tab + "  |");
+        }
+    }
+    //clase para cada nodo del KdTree
     private class KdNode{
     
         int edad; // en el kd tree representa a x

@@ -18,9 +18,9 @@ public class KdTree {
             return new KdNode(edad,peso,factor);
         }
 
-        int dim = nivel % 2;
+        int niv = nivel % 2;
 
-        if(dim == 0){
+        if(niv == 0){
 
             if(edad < node.edad){
                  node.left = insertarEnKdTree(node.left,edad,peso,factor,++nivel);

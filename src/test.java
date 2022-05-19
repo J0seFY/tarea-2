@@ -13,6 +13,7 @@ public class test {
         kd.insert(4,2,6); //*
         kd.insert(2,3,5);
 
+        kd.Imprimir();
 
         System.out.println(kd.factor(2,3));
         System.out.println(kd.factor(6,4));
@@ -20,6 +21,8 @@ public class test {
         System.out.println(kd.factor(10,2));
 
         System.out.println(kd.contarRango(4,8,2,5,2));
+
+
 
 
 
